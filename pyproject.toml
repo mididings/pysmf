@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=65", "wheel>=0.38", "Cython>=0.29"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pysmf"
+version = "0.1.1"
+description = 'A Python module for standard MIDI files, based on libsmf'
+readme = "README.md"
+requires-python = ">=3.7"
+license = {file = "LICENSE"}
+authors = [{name = "Dominic Sacré", email = "dominic.sacre@gmx.de"},]
+maintainers = [{name = "George Rawlinson", email = "george@rawlinson.net.nz"},]
+
+[project.urls]
+homepage = "https://github.com/mididings/pysmf"
