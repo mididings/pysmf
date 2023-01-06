@@ -1,10 +1,14 @@
-include README
-include COPYING
-include NEWS
+# general documentation
+include README.md LICENSE NEWS
+
+# build
 include setup.py
-include src/smf.pyx
-include src/smf.pxd
-include src/smf.c
+
+# source
+include src/*.pyx src/*.pxd
+
+# example documentation
 include examples/*.py
-include test/test_smf.py
-include test/test.mid
+
+# tests
+graft test
