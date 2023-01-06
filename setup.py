@@ -44,6 +44,7 @@ setup(
                     "-Wfatal-errors",
                 ],
             )
-        ]
+        ],
+        language_level=3,
     ),
 )
