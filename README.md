@@ -20,7 +20,7 @@ pip install dist/*.whl
 
 ## Documentation
 
-- see the scripts in the examples directory
+- see the scripts in the `examples` directory
 - read the docstrings
 - read the code :)
 
@@ -29,4 +29,5 @@ pip install dist/*.whl
 BSD-2-Clause, as per [LICENSE](LICENSE)
 
 Copyright (C) 2009-2011  Dominic Sacré  <dominic.sacre@gmx.de>
+
 Copyright (C) 2023 Mididings Contributors
