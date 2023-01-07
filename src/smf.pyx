@@ -189,34 +189,38 @@ cdef class SMF(_SMFReference):
         """
         self.tracks[track_number].add_event(event, pulses, seconds)
 
-    property format:
+    @property
+    def format(self):
         """SMF format 0 (one track) or 1 (several tracks)"""
-        def __get__(self):
-            return self._smf.format
-        def __set__(self, int format):
-            assert not smf_set_format(self._smf, format)
+        return self._smf.format
 
-    property ppqn:
+    @format.setter
+    def format(self, int format):
+        assert not smf_set_format(self._smf, format)
+
+    @property
+    def ppqn(self):
         """Pulses per quarter note (read/write)."""
-        def __get__(self):
-            return self._smf.ppqn
-        def __set__(self, int ppqn):
-            assert not smf_set_ppqn(self._smf, ppqn)
+        return self._smf.ppqn
 
-    property number_of_tracks:
+    @ppqn.setter
+    def ppqn(self, int ppqn):
+        assert not smf_set_ppqn(self._smf, ppqn)
+
+    @property
+    def number_of_tracks(self):
         """Number of tracks (read-only)."""
-        def __get__(self):
-            return len(self.tracks)
+        return len(self.tracks)
 
-    property events:
+    @property
+    def events(self):
         """An iterable object yielding all events on all tracks."""
-        def __get__(self):
-            return EventIterator(self)
+        return EventIterator(self)
 
-    property tracks:
+    @property
+    def tracks(self):
         """A list-like object providing access to individual tracks."""
-        def __get__(self):
-            return TrackList(self)
+        return TrackList(self)
 
 
 cdef class EventIterator(_SMFReference):
@@ -311,15 +315,15 @@ cdef class Track(_SMFTrackReference):
         else:
             raise ValueError("pulses or seconds must be specified")
 
-    property events:
+    @property
+    def events(self):
         """A list-like object providing access to all events on this track."""
-        def __get__(self):
-            return TrackEventList(self, self.track_number)
+        return TrackEventList(self, self.track_number)
 
-    property track_number:
+    @property
+    def track_number(self):
         """The index of this track within the containing SMF object."""
-        def __get__(self):
-            return self._track.track_number - 1
+        return self._track.track_number - 1
 
 
 cdef class TrackEventList(_SMFTrackReference):
@@ -389,34 +393,33 @@ cdef class Event(_SMFEventReference):
         else:
             return ''
 
-    property track_number:
-        def __get__(self):
-            if self._event.track_number < 1:
-                raise AttributeError
-            return self._event.track_number - 1
+    @property
+    def track_number(self):
+        if self._event.track_number < 1:
+            raise AttributeError
+        return self._event.track_number - 1
 
-    property event_number:
-        def __get__(self):
-            if self._event.event_number < 1:
-                raise AttributeError
-            return self._event.event_number - 1
+    @property
+    def event_number(self):
+        if self._event.event_number < 1:
+            raise AttributeError
+        return self._event.event_number - 1
 
-    property time_pulses:
-        def __get__(self):
-            if self._event.time_pulses < 0:
-                raise AttributeError
-            return self._event.time_pulses
+    @property 
+    def time_pulses(self):
+        if self._event.time_pulses < 0:
+            raise AttributeError
+        return self._event.time_pulses
 
-    property time_seconds:
-        def __get__(self):
-            if self._event.time_seconds < 0.0:
-                raise AttributeError
-            return self._event.time_seconds
+    @property
+    def time_seconds(self):
+        if self._event.time_seconds < 0.0:
+            raise AttributeError
+        return self._event.time_seconds
 
-    property midi_buffer:
-        def __get__(self):
-            return _binary_to_list(self._event.midi_buffer,
-                                   self._event.midi_buffer_length)
+    @property
+    def midi_buffer(self):
+        return _binary_to_list(self._event.midi_buffer, self._event.midi_buffer_length)
 
 
 cdef Event _event_reference(_SMFReference parent, int track_number,
