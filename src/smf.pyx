@@ -32,6 +32,8 @@ A module for reading and writing standard MIDI files, based on libsmf.
 from smf cimport *
 from libc.stdlib cimport malloc, free
 
+__version__ = "0.1.1"
+
 
 cdef list _index_helper(n, int length, char *what):
     """simplify handling of single indices and slices by returning a list
