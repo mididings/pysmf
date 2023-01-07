@@ -31,7 +31,6 @@ A module for reading and writing standard MIDI files, based on libsmf.
 
 from smf cimport *
 from libc.stdlib cimport malloc, free
-from cpython cimport PY_VERSION_HEX
 
 
 cdef list _index_helper(n, int length, char *what):
@@ -53,10 +52,7 @@ cdef bytes _data_to_bytestring(data):
     elif isinstance(data, unicode):
         return data.encode('latin1')
     else:
-        if PY_VERSION_HEX >= 0x03000000:
-            return ''.join(map(chr, data)).encode('latin1')
-        else:
-            return b''.join(map(chr, data))
+        return ''.join(map(chr, data)).encode('latin1')
 
 def data_to_bytestring(data):
     return _data_to_bytestring(data)
@@ -66,8 +62,8 @@ cdef list _binary_to_list(unsigned char *buf, int length):
     return [buf[i] for i in range(length)]
 
 cdef str _decode(s):
-    """convert to standard string type, depending on python version"""
-    if PY_VERSION_HEX >= 0x03000000 and isinstance(s, bytes):
+    """convert to standard string type"""
+    if isinstance(s, bytes):
         return s.decode()
     else:
         return s
