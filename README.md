@@ -30,4 +30,4 @@ BSD-2-Clause, as per [LICENSE](LICENSE)
 
 Copyright (C) 2009-2011  Dominic Sacré  <dominic.sacre@gmx.de>
 
-Copyright (C) 2023 Mididings Contributors
+Copyright (C) 2023 pysmf Contributors
